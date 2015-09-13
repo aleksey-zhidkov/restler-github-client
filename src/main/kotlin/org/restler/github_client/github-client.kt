@@ -44,8 +44,10 @@ fun main(args: Array<String>) {
                 val (name, res) = it
                 while (!res.hasResult()) Thread.sleep(100)
                 println("$name: ${res.getResult()}")
-                (res.getResult() as Map<String, Int>).keySet() }.
-            toSet()
+                (res.getResult() as Map<String, Int>).entrySet() }.
+            groupBy { it.key }.
+            map { Pair(it.key, it.value.sumBy { it.value }) }.
+            sortDescendingBy { it.second }
 
     println("User languages: $userLngs")
 }
