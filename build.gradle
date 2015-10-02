@@ -1,35 +1,31 @@
 buildscript {
-    ext.kotlin_version = '0.12.1230'
-    ext {
-        kotlinVersion = '0.12.613'
-    }
+    ext.kotlin_version = '0.14.449'
+    ext.restler_version = '0.4.0'
 
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
-apply plugin: "kotlin"
 apply plugin: 'kotlin'
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
-            "org.restler:restler-core:0.3.1",
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+
+            "org.restler:restler-core:$restler_version",
+            "org.restler:restler-spring-mvc:$restler_version",
+
             'com.fasterxml.jackson.module:jackson-module-paranamer:2.6.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
-compileJava {
-    options.compilerArgs << '-parameters'
-}
 sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
 }
